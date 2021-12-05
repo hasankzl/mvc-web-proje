@@ -1,0 +1,64 @@
+﻿@model Login.Models.Post
+@{
+    ViewData["Title"] = "Edit";
+    var categoryList = (List<Category>)ViewData["categoryList"];
+}
+
+<form method="post">
+
+    <div class="border p-3">
+
+        <div class="form-group row">
+            <h2 class="text-info lp-3">Edit Post</h2>
+        </div>
+    </div>
+    <input asp-for="Id" hidden />
+    <div class="form-group row">
+        <div class="col-4">
+            <label asp-for="CategoryId">Category</label>
+        </div>
+        <div class="col-8">
+            <select asp-for="CategoryId" class="form-control"
+                    asp-items="@(new SelectList(categoryList, nameof(Category.Id), nameof(Category.Name)))">
+                <option>Please select one</option>
+            </select>
+
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            <label asp-for="Title"></label>
+        </div>
+        <div class="col-8">
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            <label asp-for="Body"></label>
+        </div>
+        <div class="col-8">
+            <textarea id="text" asp-for="Body" class="form-control">
+</textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-info w-100 mb-2" value="update" />
+    <a asp-controller="Category" asp-action="Index" class="btn btn-primary">
+        Go back
+    </a>
+</form>
+
+@section Scripts{
+
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("text")
+
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

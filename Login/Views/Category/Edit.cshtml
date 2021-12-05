@@ -1,5 +1,4 @@
 ﻿@model Login.Models.Category
-Login
 @{
     ViewData["Title"] = "Edit";
 }
@@ -7,9 +6,8 @@ Login
 <form method="post">
 
     <div class="border p-3">
-        <div>Edit category</div>
         <div class="form-group row">
-            <h2 class="text-info lp-3">Add Category</h2>
+            <h2 class="text-info lp-3">Edit Category</h2>
         </div>
     </div>
     <input asp-for="Id" hidden />
@@ -32,7 +30,7 @@ Login
         </div>
     </div>
 
-    <input type="submit" class="btn btn-info w-100" value="update" />
+    <input type="submit" class="btn btn-info w-100 mb-2" value="update" />
     <a asp-controller="Category" asp-action="Index" class="btn btn-primary">
         Go back
     </a>

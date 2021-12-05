@@ -1,6 +1,8 @@
 ﻿using Login.Data;
 using Login.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace Login.Controllers
         {
             this._db = _db;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
 
@@ -25,6 +27,7 @@ namespace Login.Controllers
         }
 
         // get for
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -33,6 +36,7 @@ namespace Login.Controllers
         // post for
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(Category obj)
         {
             if (ModelState.IsValid)
@@ -46,6 +50,7 @@ namespace Login.Controllers
 
 
         // get for
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {   
             if(id == null || id == 0)
@@ -64,6 +69,7 @@ namespace Login.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Category obj)
         {
             if (ModelState.IsValid)
@@ -77,6 +83,7 @@ namespace Login.Controllers
 
 
         // get for
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             if (id == null || id == 0)
@@ -94,6 +101,7 @@ namespace Login.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeletePost(int id)
         {
             var obj = _db.Category.Find(id);
@@ -106,6 +114,20 @@ namespace Login.Controllers
          
             return RedirectToAction("Index");
         }
+        public IActionResult List(int id)
+        {
 
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Category.Include(c => c.Posts).FirstOrDefault(c => c.Id == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
     }
 }

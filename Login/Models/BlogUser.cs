@@ -11,5 +11,6 @@ namespace Login.Models
     {
 
    public string Name { get; set; }
+   public ICollection<Comment> Commnets{ get; set; }
     }
 }

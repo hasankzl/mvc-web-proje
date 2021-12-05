@@ -287,7 +287,7 @@ namespace Login.Data.Migrations
             modelBuilder.Entity("Login.Models.Comment", b =>
                 {
                     b.HasOne("Login.Models.BlogUser", "BlogUser")
-                        .WithMany()
+                        .WithMany("Commnets")
                         .HasForeignKey("BlogUserId");
 
                     b.HasOne("Login.Models.Post", "Post")
@@ -361,6 +361,11 @@ namespace Login.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Login.Models.BlogUser", b =>
+                {
+                    b.Navigation("Commnets");
                 });
 
             modelBuilder.Entity("Login.Models.Category", b =>

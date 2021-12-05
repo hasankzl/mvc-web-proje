@@ -1,6 +1,8 @@
-﻿using Login.Models;
+﻿using Login.Data;
+using Login.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,18 @@ namespace Login.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+      
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext _db)
         {
-            _logger = logger;
+            this._db = _db;
         }
-
         public IActionResult Index()
         {
+
+            ViewData["categoryList"] = _db.Category.Include(c => c.Posts).ToList();
+
             return View();
         }
 

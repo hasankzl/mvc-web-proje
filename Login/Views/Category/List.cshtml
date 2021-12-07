@@ -18,7 +18,7 @@
 
             <div class="card">
                 <a asp-controller="Post" asp-action="Read"  asp-route-Id="@post.Id">
-                    <img class="img-fluid" src="assets/img/demopic/5.jpg" alt="">
+                    <img class="img-fluid"  src="/img/post/@post.Image" alt="">
                 </a>
                 <div class="card-block">
                     <h2 class="card-title"><a asp-controller="Post" asp-action="Read" asp-route-Id="@post.Id">@post.Title</a></h2>

@@ -38,7 +38,16 @@ namespace Login
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-
+            
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit =false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+            });
             services.Configure<SignInOptions>(options =>
            {
                options.RequireConfirmedEmail = false;

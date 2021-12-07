@@ -9,6 +9,10 @@ namespace Login.Data
 {
     public class ApplicationDbContext : IdentityDbContext<BlogUser>
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

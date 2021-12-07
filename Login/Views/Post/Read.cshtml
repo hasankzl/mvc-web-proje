@@ -1,4 +1,4 @@
-﻿@model Login.Models.Post
+﻿@model Login.Models.PostViewModal
 @{
 }
 
@@ -59,7 +59,7 @@
                 </div>
                 <!-- End Top Menta -->
 
-                <h1 class="posttitle">@Model.Title</h1>
+                <h1 class="posttitle">@Model.Post.Title</h1>
 
             </div>
 
@@ -68,7 +68,26 @@
             <!-- End Featured Image -->
             <!-- Begin Post Content -->
             <div class="article-post">
-                @Html.Raw(Model.Body)
+                @Html.Raw(Model.Post.Body)
+            </div>
+
+            <div>
+                @foreach(var com in Model.Post.Comments)
+            {
+                <h2>@com.Message</h2>
+            }
+            </div>
+
+            <div class="p-2 m-2">
+                <form method="post" asp-controller="Comment" asp-action="Create">
+
+                    <input name="postId" value="@Model.Post.Id" hidden />
+                    <div class="form-group">
+
+                        <textarea name="message" class="form-control" ></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-info w-100 mb-2" value="Yorum ekle" />
+                </form>
             </div>
             <!-- End Post Content -->
             <!-- Begin Tags -->

@@ -1,11 +1,14 @@
 ﻿using Login.Data;
 using Login.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Login.Controllers
@@ -13,10 +16,12 @@ namespace Login.Controllers
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PostController(ApplicationDbContext _db)
+        public PostController(ApplicationDbContext _db, IWebHostEnvironment _webHostEnvironment)
         {
             this._db = _db;
+            this._webHostEnvironment = _webHostEnvironment;
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
@@ -40,10 +45,35 @@ namespace Login.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public IActionResult Create(Post obj)
+        public async Task<IActionResult> CreateAsync(Post obj)
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                foreach (var Image in files)
+                {
+                    if (Image != null && Image.Length > 0)
+                    {
+
+                        var file = Image;
+                        var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "img\\post");
+
+                        if (file.Length > 0)
+                        {
+                            var fileName = ContentDispositionHeaderValue.Parse
+                                (file.ContentDisposition).FileName.Trim('"');
+
+                            System.Console.WriteLine(fileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                obj.Image = file.FileName;
+                            }
+
+
+                        }
+                    }
+                }
                 _db.Post.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,13 +153,15 @@ namespace Login.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.Post.Include(c => c.Category).FirstOrDefault(c => c.Id == id);
+            var obj = _db.Post.Include(c => c.Category).Include(c => c.Comments).FirstOrDefault(c => c.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
+            PostViewModal postViewModal = new PostViewModal();
+            postViewModal.Post = obj;
 
-            return View(obj);
+            return View(postViewModal);
         }
     }
 }

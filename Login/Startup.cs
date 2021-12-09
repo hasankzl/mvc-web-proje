@@ -13,6 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
 
 namespace Login
 {
@@ -38,7 +42,10 @@ namespace Login
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit =false;
@@ -52,6 +59,17 @@ namespace Login
            {
                options.RequireConfirmedEmail = false;
            });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var cultures = new List<CultureInfo> {
+        new CultureInfo("en-US"),
+        new CultureInfo("tr-TR")
+    };
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                options.SupportedCultures = cultures;
+                options.SupportedUICultures = cultures;
+            });
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +86,10 @@ namespace Login
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -75,6 +97,10 @@ namespace Login
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
+
+
 
             app.UseEndpoints(endpoints =>
             {

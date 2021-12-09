@@ -3,6 +3,7 @@ using Login.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,13 @@ namespace Login.Controllers
 {
     public class HomeController : Controller
     {
-      
+        private readonly IStringLocalizer<HomeController> _localizer;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ApplicationDbContext _db)
+        public HomeController(ApplicationDbContext _db, IStringLocalizer<HomeController> _localizer)
         {
             this._db = _db;
+            this._localizer = _localizer;
         }
         public IActionResult Index()
         {

@@ -1,4 +1,7 @@
 ﻿@model Login.Models.PostViewModal
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BlogUser> SignInManager
+@inject UserManager<BlogUser> UserManager
 @{
 }
 
@@ -71,24 +74,36 @@
                 @Html.Raw(Model.Post.Body)
             </div>
 
-            <div>
-                @foreach(var com in Model.Post.Comments)
-            {
-                <h2>@com.Message</h2>
-            }
-            </div>
-
-            <div class="p-2 m-2">
-                <form method="post" asp-controller="Comment" asp-action="Create">
-
-                    <input name="postId" value="@Model.Post.Id" hidden />
-                    <div class="form-group">
-
-                        <textarea name="message" class="form-control" ></textarea>
+            <div class="m-3">
+                @foreach (var com in Model.Post.Comments)
+                {
+                    <div class="card p-3 mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">@com.BlogUser.Name</small> <small class="font-weight-bold">@com.Message</small></span> </div> <small>2 days ago</small>
+                        </div>
+                        <div class="action d-flex justify-content-between mt-2 align-items-center">
+                            <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
+                            <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
+                        </div>
                     </div>
-                    <input type="submit" class="btn btn-info w-100 mb-2" value="Yorum ekle" />
-                </form>
+                }
             </div>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="p-2 m-2">
+                    <form method="post" asp-controller="Comment" asp-action="Create">
+   
+                        <input name="postId" value="@Model.Post.Id" hidden />
+                        <div class="form-group">
+
+                            <textarea name="message" class="form-control"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-info w-100 mb-2" value="Yorum ekle" />
+                    </form>
+                </div>
+            }
+
             <!-- End Post Content -->
             <!-- Begin Tags -->
             <div class="after-post-tags">

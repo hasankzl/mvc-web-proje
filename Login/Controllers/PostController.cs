@@ -153,7 +153,7 @@ namespace Login.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.Post.Include(c => c.Category).Include(c => c.Comments).FirstOrDefault(c => c.Id == id);
+            var obj = _db.Post.Include(c => c.Category).Include(c => c.Comments).ThenInclude(c => c.BlogUser).FirstOrDefault(c => c.Id == id);
             if (obj == null)
             {
                 return NotFound();

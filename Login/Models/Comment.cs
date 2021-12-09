@@ -11,6 +11,8 @@ namespace Login.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("BlogUser")]
+        public string BlogUserId { get; set; }
         public BlogUser BlogUser { get; set; }
         public string Message { get; set; }
         [ForeignKey("Post")]

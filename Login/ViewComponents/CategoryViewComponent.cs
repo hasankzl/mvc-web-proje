@@ -1,4 +1,4 @@
-﻿using Login.Data;
+﻿using Blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Login.ViewComponents
+namespace Blog.ViewComponents
 {
     public class CategoryViewComponent : ViewComponent
     {

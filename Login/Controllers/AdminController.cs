@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Login.Controllers
+namespace Blog.Controllers
 {
     public class AdminController : Controller
     {

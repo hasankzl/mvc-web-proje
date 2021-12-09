@@ -1,6 +1,6 @@
 ﻿using System;
-using Login.Models;
-using Login.Data;
+using Blog.Models;
+using Blog.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(Login.Areas.Identity.IdentityHostingStartup))]
-namespace Login.Areas.Identity
+[assembly: HostingStartup(typeof(Blog.Areas.Identity.IdentityHostingStartup))]
+namespace Blog.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

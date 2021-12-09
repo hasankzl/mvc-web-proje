@@ -1,5 +1,5 @@
-﻿using Login.Data;
-using Login.Models;
+﻿using Blog.Data;
+using Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Login.Controllers
+namespace Blog.Controllers
 {
     public class PostController : Controller
     {

@@ -1,11 +1,11 @@
-﻿using Login.Models;
+﻿using Blog.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Login.Data
+namespace Blog.Data
 {
     public class ApplicationDbContext : IdentityDbContext<BlogUser>
     {

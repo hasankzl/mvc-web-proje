@@ -1,5 +1,5 @@
-using Login.Models;
-using Login.Data;
+using Blog.Models;
+using Blog.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 
-namespace Login
+namespace Blog
 {
     public class Startup
     {

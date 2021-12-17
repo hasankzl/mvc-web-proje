@@ -78,6 +78,7 @@ namespace Blog.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewData["categoryList"] = _db.Category.ToList();
             return View(obj);
         }
 

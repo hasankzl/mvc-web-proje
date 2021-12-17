@@ -9,18 +9,18 @@
     <div class="border p-3">
 
         <div class="form-group row">
-            <h2 class="text-info lp-3">Edit Post</h2>
+            <h2 class="text-info lp-3"> Post Güncelle</h2>
         </div>
     </div>
     <input asp-for="Id" hidden />
     <div class="form-group row">
         <div class="col-4">
-            <label asp-for="CategoryId">Category</label>
+            <label asp-for="CategoryId">Kategori</label>
         </div>
         <div class="col-8">
             <select asp-for="CategoryId" class="form-control"
                     asp-items="@(new SelectList(categoryList, nameof(Category.Id), nameof(Category.Name)))">
-                <option>Please select one</option>
+                <option>Bir tane seçiniz</option>
             </select>
 
             <span asp-validation-for="CategoryId" class="text-danger"></span>

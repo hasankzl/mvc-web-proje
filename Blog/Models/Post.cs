@@ -15,10 +15,14 @@ namespace Blog.Models
         public string Title { get; set; }
 
         [ForeignKey("Category")]
+        [Required]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        [MinLength(100)]
         public string Body { get; set; }
 
+        [Required]
         public String Image { get; set; }
         public  ICollection<Comment> Comments { get; set; }
     }

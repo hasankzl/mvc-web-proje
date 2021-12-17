@@ -7,7 +7,7 @@
 
     <div class="border p-3">
         <div class="form-group row">
-            <h2 class="text-info lp-3">Edit Category</h2>
+            <h2 class="text-info lp-3">Güncelle</h2>
         </div>
     </div>
     <input asp-for="Id" hidden />
@@ -18,6 +18,15 @@
         <div class="col-8">
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            <label asp-for="EngName"></label>
+        </div>
+        <div class="col-8">
+            <input asp-for="EngName" class="form-control" />
+            <span asp-validation-for="EngName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">

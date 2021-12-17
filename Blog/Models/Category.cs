@@ -16,6 +16,8 @@ namespace Blog.Models
 
         public string Name { get; set; }
 
+        public string EngName { get; set; }
+
         [DisplayName("Display Order")]
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Hata MaxSize")]

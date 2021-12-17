@@ -46,7 +46,9 @@
         </div>
         <!-- End Fixed Left Share -->
         <!-- Begin Post -->
+           
         <div class="col-md-8 col-md-offset-2 col-xs-12">
+            <img src="/img/post/@Model.Post.Image" width="100%" height="400">
             <div class="mainheading">
 
                 <!-- Begin Top Meta -->
@@ -70,6 +72,7 @@
             <img class="featured-image img-fluid" src="assets/img/demopic/10.jpg" alt="">
             <!-- End Featured Image -->
             <!-- Begin Post Content -->
+         
             <div class="article-post">
                 @Html.Raw(Model.Post.Body)
             </div>
@@ -93,7 +96,7 @@
             {
                 <div class="p-2 m-2">
                     <form method="post" asp-controller="Comment" asp-action="Create">
-   
+
                         <input name="postId" value="@Model.Post.Id" hidden />
                         <div class="form-group">
 

@@ -13,17 +13,17 @@
 
         </div>
         <div class="form-group row">
-            <h2 class="text-info lp-3">Add Post</h2>
+            <h2 class="text-info lp-3">Post Ekle</h2>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-4">
-            <label asp-for="CategoryId"> Category</label>
+            <label asp-for="CategoryId"> Kategori</label>
         </div>
         <div class="col-8">
             <select asp-for="CategoryId" class="form-control"
                     asp-items="@(new SelectList(categoryList, nameof(Category.Id), nameof(Category.Name)))">
-                <option>Please select one</option>
+                <option>Bir tane seçiniz</option>
             </select>
 
             <span asp-validation-for="CategoryId" class="text-danger"></span>

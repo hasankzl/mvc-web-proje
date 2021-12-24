@@ -25,6 +25,7 @@ namespace Blog.Controllers
         [HttpGet]
         public List<Post> Get()
         {
+
             return _db.Post.ToList();
         }
 
